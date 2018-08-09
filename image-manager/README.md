@@ -1,0 +1,1 @@
+The simple image manager app made with React
