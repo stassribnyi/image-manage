@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import './Images.css';
 
 import axios from 'axios';
 
@@ -8,7 +8,7 @@ const instance = axios.create({
   baseURL: 'http://localhost:5000'
 });
 
-class App extends Component {
+class Images extends Component {
   constructor(props) {
     super(props);
 
@@ -34,7 +34,7 @@ class App extends Component {
       width="100" />);
 
     return (
-      <div className="App">
+      <div>
         {
           imgs
         }
@@ -43,4 +43,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Images;
