@@ -1,21 +1,24 @@
 .pagination-controls {
+    color: white;
+}
+
+.pagination-controls td {
+    border-top: none;
+}
+
+.pagination-controls .page-number,
+.pagination-controls .page-size {
+    height: 22px;
+    width: 40px;
+}
+
+.pagination-controls .icon {
     display: inline-flex;
     height: 14px;
     width: 14px;
     background-repeat: no-repeat;
     background-size: contain;
-}
-
-.pagination-controlS .page-number {
-    height: 22px;
-    width: 40px;
-}
-
-.pagination-controlS .page-size {}
-
-.pagination-controls .icon {
-    height: 14px;
-    width: 14px;
+    cursor: pointer;
 }
 
 .pagination-controls .icon.next {

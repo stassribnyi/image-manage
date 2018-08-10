@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Pagination.css';
+
 export default props => {
   const {
     pageSize,
@@ -28,9 +30,9 @@ export default props => {
   ));
 
   return (
-    <table className="table table-dark pagination-compact">
+    <table className="table pagination-compact">
       <tbody>
-        <tr className="pagination-controls">
+        <tr className="pagination-controls bg-success">
           <td>
             <span className="icon first" onClick={onFirst} />
           </td>

@@ -6,6 +6,13 @@
   background-position: center;
 }
 
+@media (min-width: 1150px) {
+  .pagination-compact {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 1150px) {
   .responsive-image-table * {
     -webkit-box-sizing: border-box;
@@ -17,7 +24,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
-  .responsive-image-table table {
+  .responsive-image-table .image-table {
     border: none !important;
     background: transparent !important;
     display: block;
@@ -25,51 +32,65 @@
     -moz-box-shadow: none !important;
     box-shadow: none !important;
   }
-  .responsive-image-table table tbody {
+  .responsive-image-table .image-table .image-tbody {
     display: block;
   }
-  .responsive-image-table table tr:first-child {
+  .responsive-image-table .image-table .image-thead tr:first-child {
     display: block;
     position: absolute;
     top: -9999px;
     left: -9999px;
   }
-  .responsive-image-table table tr {
+  .responsive-image-table .image-table .image-tbody tr {
     display: block;
     border: 1px solid #383838;
     margin-bottom: 7px;
     width: 100%;
   }
-  .responsive-image-table table td {
+  .responsive-image-table .image-table .image-tbody td {
     display: block;
     border: none !important;
     position: relative !important;
     padding-bottom: 5px !important;
     text-align: left !important;
   }
-  .responsive-image-table table td:before {
+  .responsive-image-table .image-table .image-tbody td:before {
     padding-right: 5px;
   }
-  .responsive-image-table table td {
+  .responsive-image-table .image-table .image-tbody td {
     padding-bottom: 10px !important;
     padding-top: 7px !important;
   }
-  .responsive-image-table table td a {
+  .responsive-image-table .image-table .image-tbody td a {
     height: 300px;
     display: block;
   }
-  .responsive-image-table table td a .image {
+  .responsive-image-table .image-table .image-tbody td a .image {
     height: 100%;
     width: 100%;
+  }
+  .responsive-image-table .image-table .image-tfoot {
+    display: flex;
+    justify-content: center;
+  }
+  .responsive-image-table .image-table .image-tfoot>tr {
+    display: inline-flex;
+  }
+  .responsive-image-table .image-table .image-tfoot>tr>td {
+    border-top: none;
+    display: inline-flex;
+  }
+  .responsive-image-table .image-table .image-tfoot .table {
+    margin-bottom: 0;
   }
   /* ----------------------------------------------------------
       1c. Insert Column Labels into the content attributes below (copy rows and change the td:nth-of-type numbers as needed to match table column number)
     ------------------------------------------------------------ */
-  .responsive-image-table table td:nth-of-type(1):before {
+  .responsive-image-table .image-table .image-tbody td:nth-of-type(1):before {
     content: "#: ";
     font-weight: bold;
   }
-  .responsive-image-table table td:nth-of-type(3):before {
+  .responsive-image-table .image-table .image-tbody td:nth-of-type(3):before {
     content: "Tooltip: ";
     font-weight: bold;
   }
