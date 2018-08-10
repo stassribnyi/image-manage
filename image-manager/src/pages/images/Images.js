@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 
 import { fetchImages } from '../../actions/imageActions';
@@ -7,6 +9,28 @@ import { setPageNumber, setPageSize } from '../../actions/paginationActions';
 import Pagination from '../../components/pagination';
 
 import './Images.css';
+
+
+const ImageTableTr = props => {
+  return (
+    <tr>
+      <td>{props.index + 1}</td>
+      <td>
+        <a href={props.url}>
+          <span
+            className="image"
+            style={{ backgroundImage: `url("${props.url}")` }}
+          />
+        </a>
+      </td>
+      <td>{props.tooltip}</td>
+      <td>
+        <NavLink to="edit">Edit</NavLink>
+      </td>
+      <td>Delete</td>
+    </tr>
+  );
+};
 
 class Images extends Component {
   componentDidUpdate(prevProps) {
@@ -104,20 +128,7 @@ class Images extends Component {
       onLast: this.handleLast
     };
 
-    const trs = images.map((image, i) => (
-      <tr key={image.id}>
-        <td>{i + 1}</td>
-        <td>
-          <a href={image.url}>
-            <span
-              className="image"
-              style={{ backgroundImage: `url("${image.url}")` }}
-            />
-          </a>
-        </td>
-        <td>{image.tooltip}</td>
-      </tr>
-    ));
+    const trs = images.map((image, i) => <ImageTableTr {...image} index={i} />);
 
     return (
       <div className="row">
@@ -126,9 +137,11 @@ class Images extends Component {
             <table className="table table-striped image-table">
               <thead className="bg-success image-thead">
                 <tr>
-                  <th style={{width: '40px'}}>#</th>
-                  <th style={{width: '220px'}}>Url</th>
+                  <th className="th-40">#</th>
+                  <th className="th-image">Url</th>
                   <th>Tooltip</th>
+                  <th className="th-40">Edit</th>
+                  <th className="th-40">Delete</th>
                 </tr>
               </thead>
               <tbody className="image-tbody">{trs}</tbody>

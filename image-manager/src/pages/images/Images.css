@@ -6,6 +6,14 @@
   background-position: center;
 }
 
+.th-40 {
+  width: 40px;
+}
+
+.th-image {
+  width: 220px;
+}
+
 @media (min-width: 1150px) {
   .pagination-compact {
     max-width: 500px;
