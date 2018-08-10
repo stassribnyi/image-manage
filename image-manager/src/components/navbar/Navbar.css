@@ -1,0 +1,18 @@
+.navbar {
+    padding: 10px 16px;
+}
+
+.navbar .navbar-brand {
+    padding: 0;
+}
+
+.navbar .navbar-brand .logo {
+    width: 40px;
+    height: 40px;
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse {
+        margin-top: 4px;
+    }
+}

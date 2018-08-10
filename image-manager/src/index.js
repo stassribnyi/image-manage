@@ -15,6 +15,7 @@ import registerServiceWorker from './registerServiceWorker';
 const routes = [
   {
     path: '/',
+    exact: true,
     component: Images,
     routes: [
       {

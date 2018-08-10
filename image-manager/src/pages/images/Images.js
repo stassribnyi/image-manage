@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import config from '../../assets/config';
 
 import './Images.css';
 
-import axios from 'axios';
-
 const instance = axios.create({
-  baseURL: 'http://localhost:5000'
+  baseURL: config.BASE_URL
 });
 
 class Images extends Component {
