@@ -126,8 +126,8 @@ class Images extends Component {
             <table className="table table-striped image-table">
               <thead className="bg-success image-thead">
                 <tr>
-                  <th>#</th>
-                  <th>Url</th>
+                  <th style={{width: '40px'}}>#</th>
+                  <th style={{width: '220px'}}>Url</th>
                   <th>Tooltip</th>
                 </tr>
               </thead>
