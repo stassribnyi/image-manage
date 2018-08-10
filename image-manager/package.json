@@ -18,9 +18,10 @@
     "babel-preset-stage-3": "^6.24.1"
   },
   "scripts": {
-    "start": "react-scripts start | json-server image-source.json",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",    
+    "dev": "npm start | json-server image-source.json"
   }
 }
