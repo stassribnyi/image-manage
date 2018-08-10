@@ -1,39 +1,23 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import config from '../../assets/config';
+import { connect } from 'react-redux';
+
+import { fetchImages } from '../../actions/imageActions';
 
 import './Images.css';
 
 const DEFAULT_PAGE_SIZE_OPTIONS = [1, 5, 25, 50];
 
-const instance = axios.create({
-  baseURL: config.BASE_URL
-});
-
 class Images extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      images: []
-    };
-  }
-
-  componentDidMount() {
-    instance.get('/images').then(response => {
-      console.log('fetched');
-
-      this.setState({ images: response.data });
-    });
-  }
-
   render() {
-    const trs = this.state.images.map((image, i) => (
+    const trs = this.props.images.map((image, i) => (
       <tr key={image.id}>
         <td>{i + 1}</td>
         <td>
           <a href={image.url}>
-            <span className="image" style={{ backgroundImage: `url("${image.url}")` }} />
+            <span
+              className="image"
+              style={{ backgroundImage: `url("${image.url}")` }}
+            />
           </a>
         </td>
         <td>{image.tooltip}</td>
@@ -70,4 +54,8 @@ class Images extends Component {
   }
 }
 
-export default Images;
+const mapStateToProps = state => ({
+  images: state.images.items
+});
+
+export default connect(mapStateToProps, { fetchImages })(Images);
