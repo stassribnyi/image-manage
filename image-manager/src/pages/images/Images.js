@@ -3,13 +3,21 @@ import { connect } from 'react-redux';
 
 import { fetchImages } from '../../actions/imageActions';
 
+import Pagination from '../../components/pagination';
+
 import './Images.css';
 
-const DEFAULT_PAGE_SIZE_OPTIONS = [1, 5, 25, 50];
-
 class Images extends Component {
+  componentDidMount() {
+    const { pageNumber, pageSize } = this.props.pagination;
+
+    this.props.fetchImages(pageNumber, pageSize);
+  }
+
   render() {
-    const trs = this.props.images.map((image, i) => (
+    const { images, pagination } = this.props;
+
+    const trs = images.map((image, i) => (
       <tr key={image.id}>
         <td>{i + 1}</td>
         <td>
@@ -45,7 +53,7 @@ class Images extends Component {
           </div>
           <div className="row">
             <div className="mx-auto col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-              {/* pagination */}
+              <Pagination {...pagination} />
             </div>
           </div>
         </div>
@@ -55,7 +63,11 @@ class Images extends Component {
 }
 
 const mapStateToProps = state => ({
-  images: state.images.items
+  images: state.images,
+  pagination: state.pagination
 });
 
-export default connect(mapStateToProps, { fetchImages })(Images);
+export default connect(
+  mapStateToProps,
+  { fetchImages }
+)(Images);

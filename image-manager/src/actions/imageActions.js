@@ -1,12 +1,17 @@
 import imageApi from '../apis/imageApi';
 
-import { ADD_IMAGE, EDIT_IMAGE, FETCH_IMAGES } from './types';
+import { FETCH_IMAGES, SET_ITEMS_COUNT } from './types';
 
-export const fetchImages = () => dispatch => {
-  imageApi.getImages().then(images =>
+export const fetchImages = (start, limit) => dispatch => {
+  imageApi.getImages(start, limit).then(response => {
     dispatch({
       type: FETCH_IMAGES,
-      payload: images
-    })
-  );
+      payload: response.data
+    });
+
+    dispatch({
+      type: SET_ITEMS_COUNT,
+      payload: parseInt(response.headers['x-total-count'] || 0)
+    });
+  });
 };

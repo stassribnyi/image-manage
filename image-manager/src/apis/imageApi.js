@@ -1,8 +1,8 @@
 import baseApi from './baseApi';
 
 class ImageApi {
-  getImages() {
-    return baseApi.get('images');
+  getImages(start, limit) {
+    return baseApi.get(`images?_start=${start}&_limit=${limit}`);
   }
 }
 
