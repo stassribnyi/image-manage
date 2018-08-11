@@ -19,17 +19,15 @@ const routes = [
   {
     path: '/',
     exact: true,
-    component: Images,
-    routes: [
-      {
-        path: '/add',
-        component: ImageNew
-      },
-      {
-        path: '/edit:id',
-        component: ImageEdit
-      }
-    ]
+    component: Images
+  },
+  {
+    path: '/new',
+    component: ImageNew
+  },
+  {
+    path: '/edit/:id',
+    component: ImageEdit
   }
 ];
 

@@ -2,7 +2,7 @@ import baseApi from './baseApi';
 
 class ImageApi {
   getImages(start, limit) {
-    return baseApi.get(`images?_start=${start}&_limit=${limit}`);
+    return baseApi.get(`images?_page=${start}&_limit=${limit}`);
   }
 }
 

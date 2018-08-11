@@ -14,9 +14,9 @@ import './Images.css';
 const ImageTableTr = props => {
   return (
     <tr>
-      <td>{props.index + 1}</td>
+      <td>{props.id}</td>
       <td>
-        <a href={props.url}>
+        <a href={props.url} className="image-container">
           <span
             className="image"
             style={{ backgroundImage: `url("${props.url}")` }}
@@ -27,7 +27,7 @@ const ImageTableTr = props => {
       <td>
         <NavLink to="edit">Edit</NavLink>
       </td>
-      <td>Delete</td>
+      <td className="text-danger delete-image">Delete</td>
     </tr>
   );
 };
@@ -128,7 +128,7 @@ class Images extends Component {
       onLast: this.handleLast
     };
 
-    const trs = images.map((image, i) => <ImageTableTr {...image} index={i} />);
+    const trs = images.map((image, i) => <ImageTableTr {...image} />);
 
     return (
       <div className="row">
@@ -138,7 +138,7 @@ class Images extends Component {
               <thead className="bg-success image-thead">
                 <tr>
                   <th className="th-40">#</th>
-                  <th className="th-image">Url</th>
+                  <th className="th-image">Image</th>
                   <th>Tooltip</th>
                   <th className="th-40">Edit</th>
                   <th className="th-40">Delete</th>
@@ -147,7 +147,7 @@ class Images extends Component {
               <tbody className="image-tbody">{trs}</tbody>
               <tfoot className="bg-success image-tfoot">
                 <tr>
-                  <td colSpan="3">
+                  <td colSpan="5">
                     <Pagination {...paginationConfig} />
                   </td>
                 </tr>
