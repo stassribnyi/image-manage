@@ -1,16 +1,16 @@
 import imageApi from '../apis/imageApi';
 
-import { FETCH_IMAGE, RESET_IMAGE, FETCH_IMAGES, SET_ITEMS_COUNT } from './types';
+import * as TYPES from './types';
 
 export const fetchImages = (start, limit) => dispatch => {
   imageApi.getImages(start, limit).then(response => {
     dispatch({
-      type: FETCH_IMAGES,
+      type: TYPES.FETCH_IMAGES,
       payload: response.data
     });
 
     dispatch({
-      type: SET_ITEMS_COUNT,
+      type: TYPES.SET_ITEMS_COUNT,
       payload: parseInt(response.headers['x-total-count'] || 0, 10)
     });
   });
@@ -19,14 +19,48 @@ export const fetchImages = (start, limit) => dispatch => {
 export const fetchImage = (id) => dispatch => {
   imageApi.getImage(id).then(response => {
     dispatch({
-      type: FETCH_IMAGE,
+      type: TYPES.FETCH_IMAGE,
       payload: response.data
+    });
+  });
+};
+
+export const editImage = (image) => {
+  return {
+    type: TYPES.EDIT_IMAGE,
+    payload: image
+  };
+};
+
+export const updateImage = (image) => dispatch => {
+  return imageApi.updateImage(image).then(response => {
+    dispatch({
+      type: TYPES.UPDATE_IMAGE,
+      payload: response.data
+    });
+  });
+};
+
+export const addImage = (image) => dispatch => {
+  return imageApi.addImage(image).then(response => {
+    dispatch({
+      type: TYPES.ADD_IMAGE,
+      payload: response.data
+    });
+  });
+};
+
+export const deleteImage = (id) => dispatch => {
+  imageApi.deleteImage(id).then(_ => {
+    dispatch({
+      type: TYPES.DELETE_IMAGE,
+      payload: id
     });
   });
 };
 
 export const resetImage = () => {
   return {
-    type: RESET_IMAGE
+    type: TYPES.RESET_IMAGE
   }
 };

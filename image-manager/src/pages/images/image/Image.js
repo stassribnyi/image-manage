@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchImage, resetImage } from '../../../actions/imageActions';
+import { fetchImage, resetImage, editImage, updateImage, addImage } from '../../../actions/imageActions';
 
 import imagePlaceholderDefault from '../../../assets/image-placeholder.svg';
 
 import './Image.css';
 
-class ImageNew extends Component {
+class Image extends Component {
 
   componentDidMount() {
     if (this.props.match.params.id !== undefined) {
@@ -21,6 +21,33 @@ class ImageNew extends Component {
     this.unlisten();
   }
 
+  handleSubmit = event => {
+    const result = event.target.checkValidity();
+    event.preventDefault();
+
+    if (!result) {
+      return;
+    }
+
+    const { image } = this.props;
+
+    const response = image.id !== undefined
+      ? this.props.updateImage(image)
+      : this.props.addImage(image);
+
+    response.then(_ => this.props.history.push('/'));
+    
+    // TODO Need to find better solution as push doen't call listen callback
+    this.props.resetImage();
+  }
+
+  handleChange = event => {
+    const { name, value, checked, type } = event.target;
+    const result = type === 'checkbox' ? checked : value;
+
+    this.props.editImage({ ...this.props.image, [name]: result })
+  }
+
   render() {
     const { image } = this.props;
     const imagePlaceholder = image.url || imagePlaceholderDefault;
@@ -31,6 +58,8 @@ class ImageNew extends Component {
       }
     };
 
+    const submitBtnName = image.id !== undefined ? 'Update' : 'Upload';
+
     return (
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
@@ -39,7 +68,7 @@ class ImageNew extends Component {
               <span className="placeholder" {...placeholderStyle}></span>
             </div>
             <div className="card-body">
-              <form >
+              <form onSubmit={this.handleSubmit}>
                 <div className="form-group row">
                   <div className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2">
                     <label className="form-check-label" htmlFor="showTooltip">
@@ -51,30 +80,36 @@ class ImageNew extends Component {
                       <input id="showTooltip"
                         name="showTooltip"
                         className="form-check-input"
-                        type="checkbox" value={image.showTooltip} />
+                        type="checkbox"
+                        checked={image.showTooltip}
+                        onChange={this.handleChange} />
                     </div>
                   </div>
                 </div>
-                <div className="form-group row">
-                  <label htmlFor="tooltip" className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-form-label">Tooltip</label>
-                  <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
-                    <input id="tooltip"
-                      name="tooltip"
-                      type="text"
-                      className="form-control"
-                      placeholder="Some tooltip"
-                      value={image.tooltip} />
-                  </div>
-                </div>
+                {image.showTooltip
+                  ? (<div className="form-group row">
+                    <label htmlFor="tooltip" className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-form-label">Tooltip</label>
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+                      <input id="tooltip"
+                        name="tooltip"
+                        type="text"
+                        className="form-control"
+                        placeholder="Some tooltip"
+                        required
+                        value={image.tooltip}
+                        onChange={this.handleChange} />
+                    </div>
+                  </div>)
+                  : null
+                }
                 <div className="form-group row">
                   <div className="col">
-                    <button type="submit" className="btn btn-primary float-right">Add image</button>
+                    <button type="submit" className="btn btn-primary float-right">{submitBtnName}</button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-
         </div>
       </div>
     );
@@ -87,5 +122,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchImage, resetImage }
-)(ImageNew);
+  { fetchImage, resetImage, editImage, updateImage, addImage }
+)(Image);

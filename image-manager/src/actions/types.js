@@ -1,5 +1,7 @@
 // Image actions
 export const FETCH_IMAGES = 'FETCH_IMAGES';
+export const UPDATE_IMAGE = 'UPDATE_IMAGE';
+export const DELETE_IMAGE = 'DELETE_IMAGE';
 export const FETCH_IMAGE = 'FETCH_IMAGE';
 export const RESET_IMAGE = 'RESET_IMAGE';
 export const EDIT_IMAGE = 'EDIT_IMAGE';

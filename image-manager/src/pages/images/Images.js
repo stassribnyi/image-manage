@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { fetchImages } from '../../actions/imageActions';
+import { fetchImages, deleteImage } from '../../actions/imageActions';
 import { setPageNumber, setPageSize } from '../../actions/paginationActions';
 
 import Pagination from '../../components/pagination';
@@ -27,7 +27,7 @@ const ImageTableTr = props => {
       <td>
         <NavLink to={`edit/${props.id}`}>Edit</NavLink>
       </td>
-      <td className="text-danger delete-image">Delete</td>
+      <td className="text-danger delete-image" onClick={props.onDelete}>Delete</td>
     </tr>
   );
 };
@@ -53,6 +53,12 @@ class Images extends Component {
     const { pageNumber, pageSize } = pagination;
 
     this.props.fetchImages(pageNumber, pageSize);
+  }
+
+  handleDeleteImage = id => {
+    if (window.confirm("Do you really want to delete this image?")) {
+      this.props.deleteImage(id);
+    }
   }
 
   handlePageNumberChange = event => {
@@ -128,7 +134,12 @@ class Images extends Component {
       onLast: this.handleLast
     };
 
-    const trs = images.map((image, i) => <ImageTableTr key={image.id} {...image} />);
+    const trs = images.map((image, i) => (
+      <ImageTableTr key={image.id}
+        {...image}
+        onDelete={() => this.handleDeleteImage(image.id)}
+      />)
+    );
 
     return (
       <div className="row">
@@ -167,5 +178,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchImages, setPageNumber, setPageSize }
+  { deleteImage, fetchImages, setPageNumber, setPageSize }
 )(Images);
