@@ -1,0 +1,13 @@
+.card-img-top {
+    height: 240px;
+    width: 275px;
+    margin: 0 auto;
+}
+
+.card-img-top .placeholder {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-size: cover;
+    background-position: center;
+}

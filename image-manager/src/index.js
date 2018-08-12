@@ -9,7 +9,7 @@ import store from './store';
 
 import App from './pages/App';
 
-import { Images, ImageEdit, ImageNew } from './pages/images';
+import { Images, Image } from './pages/images';
 
 import RouteWithSubRoutes from './RouteWithSubRoutes';
 
@@ -23,11 +23,11 @@ const routes = [
   },
   {
     path: '/new',
-    component: ImageNew
+    component: Image
   },
   {
     path: '/edit/:id',
-    component: ImageEdit
+    component: Image
   }
 ];
 

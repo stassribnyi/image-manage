@@ -1,5 +1,4 @@
 import Images from './Images';
-import ImageNew from './new';
-import ImageEdit from './edit';
+import Image from './image';
 
-export { Images, ImageNew, ImageEdit };
+export { Images, Image };

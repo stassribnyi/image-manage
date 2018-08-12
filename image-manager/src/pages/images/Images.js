@@ -25,7 +25,7 @@ const ImageTableTr = props => {
       </td>
       <td>{props.tooltip}</td>
       <td>
-        <NavLink to="edit">Edit</NavLink>
+        <NavLink to={`edit/${props.id}`}>Edit</NavLink>
       </td>
       <td className="text-danger delete-image">Delete</td>
     </tr>
@@ -60,12 +60,12 @@ class Images extends Component {
     const value = event.target.value;
 
     if (value === '' || re.test(value)) {
-      this.props.setPageNumber(parseInt(value));
+      this.props.setPageNumber(parseInt(value, 10));
     }
   };
 
   handlePageSizeChange = event => {
-    this.props.setPageSize(parseInt(event.target.value));
+    this.props.setPageSize(parseInt(event.target.value, 10));
   };
 
   handleNext = () => {
@@ -128,7 +128,7 @@ class Images extends Component {
       onLast: this.handleLast
     };
 
-    const trs = images.map((image, i) => <ImageTableTr {...image} />);
+    const trs = images.map((image, i) => <ImageTableTr key={image.id} {...image} />);
 
     return (
       <div className="row">
