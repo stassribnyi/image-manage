@@ -79,7 +79,7 @@ class Images extends Component {
 
     const newNumber = pageNumber + 1;
 
-    if (newNumber > Math.round(itemsCount / pageSize)) {
+    if (newNumber > Math.ceil(itemsCount / pageSize)) {
       return;
     }
 
@@ -100,7 +100,7 @@ class Images extends Component {
   handleLast = () => {
     const { pageNumber, pageSize, itemsCount } = this.props.pagination;
 
-    const newNumber = Math.round(itemsCount / pageSize);
+    const newNumber = Math.ceil(itemsCount / pageSize);
 
     if (newNumber === pageNumber) {
       return;

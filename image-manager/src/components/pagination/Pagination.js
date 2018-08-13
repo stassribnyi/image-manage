@@ -13,8 +13,8 @@ export default props => {
   } = props;
 
   const { onNext, onPrev, onFirst, onLast } = props;
-
-  const pagesCount = Math.round(itemsCount / pageSize);
+  
+  const pagesCount = Math.ceil(itemsCount / pageSize);
 
   const inputProps = {
     size: 4,
