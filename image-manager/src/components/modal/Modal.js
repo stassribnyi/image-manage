@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import './Modal.css';
 
-const Modal = props => {
-  const { title, show, body } = props;
-  const { submitName, onSubmit, closeName, onClose } = props;
+const Modal = ({ modal }) => {
+  const { title, show, body } = modal;
+  const { submitName, onSubmit, closeName, onClose } = modal;
 
   const modalClass = show ? 'show d-block' : 'd-none';
   const backdropClass = show ? 'show' : 'd-none';

@@ -8,8 +8,11 @@ import {
   updateImage,
   addImage
 } from '../../../actions/imageActions';
+import { showModal, closeModal } from '../../../actions/modalActions';
 
 import imagePlaceholderDefault from '../../../assets/image-placeholder.svg';
+
+import Preview from '../../../components/preview';
 
 import './Image.css';
 
@@ -81,6 +84,16 @@ class Image extends Component {
     };
 
     reader.readAsDataURL(file);
+  };
+
+  handlePreviewImage = image => {
+    const { showTooltip, tooltip, url } = image;
+    this.props.showModal({
+      title: 'Preview',
+      closeName: 'Close',
+      onClose: () => this.props.closeModal(),
+      body: <Preview url={url} tooltip={tooltip} showTooltip={showTooltip} />
+    });
   };
 
   render() {
@@ -167,8 +180,20 @@ class Image extends Component {
                 <div className="form-group row">
                   <div className="col">
                     <button
+                      className="btn btn-info float-right"
+                      onClick={e => {
+                        e.preventDefault();
+                        this.handlePreviewImage({
+                          ...image,
+                          url: imagePlaceholder
+                        });
+                      }}
+                    >
+                      Preview
+                    </button>
+                    <button
                       type="submit"
-                      className="btn btn-primary float-right"
+                      className="btn btn-success float-right mr-3"
                     >
                       {submitBtnName}
                     </button>
@@ -189,5 +214,13 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchImage, resetImage, editImage, updateImage, addImage }
+  {
+    fetchImage,
+    resetImage,
+    editImage,
+    updateImage,
+    addImage,
+    closeModal,
+    showModal
+  }
 )(Image);

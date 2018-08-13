@@ -16,8 +16,10 @@ export default class Navigation extends Component {
   }
 
   toggleCollapse() {
-    this.setState({
-      collapsed: !this.state.collapsed
+    this.setState(prevState => {
+      return {
+        collapsed: !prevState.collapsed
+      };
     });
   }
 

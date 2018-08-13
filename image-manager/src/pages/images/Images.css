@@ -6,6 +6,10 @@
   background-position: center;
 }
 
+.image-container{
+  cursor: pointer;
+}
+
 .delete-image {
   cursor: pointer;
 }

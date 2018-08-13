@@ -3,31 +3,34 @@ import { NavLink } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
+import { showModal, closeModal } from '../../actions/modalActions';
 import { fetchImages, deleteImage } from '../../actions/imageActions';
 import { setPageNumber, setPageSize } from '../../actions/paginationActions';
 
+import Preview from '../../components/preview';
 import Pagination from '../../components/pagination';
 
 import './Images.css';
-
 
 const ImageTableTr = props => {
   return (
     <tr>
       <td>{props.id}</td>
       <td>
-        <a href={props.url} className="image-container">
+        <span className="image-container" onClick={props.onPreview}>
           <span
             className="image"
             style={{ backgroundImage: `url("${props.url}")` }}
           />
-        </a>
+        </span>
       </td>
       <td>{props.tooltip}</td>
       <td>
         <NavLink to={`edit/${props.id}`}>Edit</NavLink>
       </td>
-      <td className="text-danger delete-image" onClick={props.onDelete}>Delete</td>
+      <td className="text-danger delete-image" onClick={props.onDelete}>
+        Delete
+      </td>
     </tr>
   );
 };
@@ -56,10 +59,10 @@ class Images extends Component {
   }
 
   handleDeleteImage = id => {
-    if (window.confirm("Do you really want to delete this image?")) {
+    if (window.confirm('Do you really want to delete this image?')) {
       this.props.deleteImage(id);
     }
-  }
+  };
 
   handlePageNumberChange = event => {
     const re = /^[0-9\b]+$/;
@@ -121,6 +124,16 @@ class Images extends Component {
     this.props.setPageNumber(newNumber);
   };
 
+  handlePreviewImage = image => {
+    const { showTooltip, tooltip, url } = image;
+    this.props.showModal({
+      title: 'Preview',
+      closeName: 'Close',
+      onClose: () => this.props.closeModal(),
+      body: <Preview url={url} tooltip={tooltip} showTooltip={showTooltip} />
+    });
+  };
+
   render() {
     const { images, pagination } = this.props;
 
@@ -135,11 +148,13 @@ class Images extends Component {
     };
 
     const trs = images.map((image, i) => (
-      <ImageTableTr key={image.id}
+      <ImageTableTr
+        key={image.id}
         {...image}
         onDelete={() => this.handleDeleteImage(image.id)}
-      />)
-    );
+        onPreview={() => this.handlePreviewImage(image)}
+      />
+    ));
 
     return (
       <div className="row">
@@ -178,5 +193,12 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteImage, fetchImages, setPageNumber, setPageSize }
+  {
+    deleteImage,
+    fetchImages,
+    setPageNumber,
+    setPageSize,
+    showModal,
+    closeModal
+  }
 )(Images);
