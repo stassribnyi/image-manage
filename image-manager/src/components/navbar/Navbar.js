@@ -27,7 +27,7 @@ export default class Navigation extends Component {
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
         <NavLink to="/" className="navbar-brand" onClick={this.toggleCollapse}>
-          <img src={logoPath} alt="Image manager" className="logo" />
+          <img src={logoPath} alt="The manager logo" className="logo" />
         </NavLink>
         <button
           className="navbar-toggler"

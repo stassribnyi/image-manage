@@ -56,12 +56,14 @@ class Image extends Component {
 
   handleFileChange = event => {
     if (typeof window.FileReader !== 'function') {
-      throw "The file API isn't supported on this browser.";
+      throw new Error("The file API isn't supported on this browser.");
     }
 
     const { files } = event.target;
     if (!files) {
-      throw 'This browser does not support the `files` property of the file input.';
+      throw new Error(
+        'This browser does not support the `files` property of the file input.'
+      );
     }
 
     const file = files[0];
@@ -72,11 +74,14 @@ class Image extends Component {
 
     let reader = new FileReader();
     reader.onload = progressEvent => {
-      this.props.editImage({ ...this.props.image, url: progressEvent.target.result });
+      this.props.editImage({
+        ...this.props.image,
+        url: progressEvent.target.result
+      });
     };
 
     reader.readAsDataURL(file);
-  }
+  };
 
   render() {
     const { image } = this.props;

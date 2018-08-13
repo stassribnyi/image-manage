@@ -1,6 +1,8 @@
 import React from 'react';
 
+import Modal from '../components/modal';
 import Navbar from '../components/navbar';
+import PWAPrompt from '../components/pwa-prompt';
 
 import './App.css';
 
@@ -15,6 +17,8 @@ export default props => {
           </div>
         </div>
       </div>
+      <Modal />
+      <PWAPrompt />
     </div>
   );
 };

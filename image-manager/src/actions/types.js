@@ -11,3 +11,8 @@ export const ADD_IMAGE = 'ADD_IMAGE';
 export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER';
 export const SET_ITEMS_COUNT = 'SET_ITEMS_COUNT';
 export const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
+
+// Modal actions
+export const CLOSE_MODAL = 'CLOSE_MODAL';
+export const SHOW_MODAL = 'SHOW_MODAL';
+
