@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { showModal, closeModal } from '../../actions/modalActions';
-import { fetchImages, deleteImage } from '../../actions/imageActions';
-import { setPageNumber, setPageSize } from '../../actions/paginationActions';
+import { fetchImages, deleteImage } from '../../actions/imagesActions';
+import * as paginationActions from '../../actions/paginationActions';
 
 import Preview from '../../components/preview';
 import Pagination from '../../components/pagination';
@@ -64,66 +64,6 @@ class Images extends Component {
     }
   };
 
-  handlePageNumberChange = event => {
-    const re = /^[0-9\b]+$/;
-    const value = event.target.value;
-
-    if (value === '' || re.test(value)) {
-      this.props.setPageNumber(parseInt(value, 10));
-    }
-  };
-
-  handlePageSizeChange = event => {
-    this.props.setPageSize(parseInt(event.target.value, 10));
-  };
-
-  handleNext = () => {
-    const { pageNumber, pageSize, itemsCount } = this.props.pagination;
-
-    const newNumber = pageNumber + 1;
-
-    if (newNumber > Math.ceil(itemsCount / pageSize)) {
-      return;
-    }
-
-    this.props.setPageNumber(newNumber);
-  };
-
-  handlePrev = () => {
-    const { pageNumber } = this.props.pagination;
-    const newNumber = pageNumber - 1;
-
-    if (newNumber <= 0 || pageNumber === newNumber) {
-      return;
-    }
-
-    this.props.setPageNumber(newNumber);
-  };
-
-  handleLast = () => {
-    const { pageNumber, pageSize, itemsCount } = this.props.pagination;
-
-    const newNumber = Math.ceil(itemsCount / pageSize);
-
-    if (newNumber === pageNumber) {
-      return;
-    }
-
-    this.props.setPageNumber(newNumber);
-  };
-
-  handleFirst = () => {
-    const { pageNumber } = this.props.pagination;
-
-    const newNumber = 1;
-
-    if (newNumber === pageNumber) {
-      return;
-    }
-
-    this.props.setPageNumber(newNumber);
-  };
-
   handlePreviewImage = image => {
     const { showTooltip, tooltip, url } = image;
     this.props.showModal({
@@ -139,12 +79,12 @@ class Images extends Component {
 
     const paginationConfig = {
       ...pagination,
-      onPageNumberChange: this.handlePageNumberChange,
-      onPageSizeChange: this.handlePageSizeChange,
-      onNext: this.handleNext,
-      onPrev: this.handlePrev,
-      onFirst: this.handleFirst,
-      onLast: this.handleLast
+      onPageNumberChange: this.props.moveToPage,
+      onPageSizeChange: this.props.setPageSize,
+      onNext: this.props.moveToNext,
+      onPrev: this.props.moveToPrev,
+      onFirst: this.props.moveToFirst,
+      onLast: this.props.moveToLast
     };
 
     const trs = images.map((image, i) => (
@@ -191,14 +131,15 @@ const mapStateToProps = state => ({
   pagination: state.pagination
 });
 
+const mapDispatchToProps = {
+  ...paginationActions,
+  deleteImage,
+  fetchImages,
+  showModal,
+  closeModal
+};
+
 export default connect(
   mapStateToProps,
-  {
-    deleteImage,
-    fetchImages,
-    setPageNumber,
-    setPageSize,
-    showModal,
-    closeModal
-  }
+  mapDispatchToProps
 )(Images);

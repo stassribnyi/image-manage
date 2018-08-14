@@ -1,8 +1,4 @@
-import {
-  SET_PAGE_NUMBER,
-  SET_ITEMS_COUNT,
-  SET_PAGE_SIZE
-} from '../actions/types';
+import * as TYPES from '../actions/types';
 
 const DEFAULT_PAGE_SIZE = 5;
 const DEFAULT_PAGE_SIZE_OPTIONS = [1, DEFAULT_PAGE_SIZE, 25, 50];
@@ -16,17 +12,63 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SET_PAGE_NUMBER:
+    case TYPES.MOVE_TO_PAGE:
       return {
         ...state,
         pageNumber: action.payload
       };
-    case SET_ITEMS_COUNT:
+    case TYPES.MOVE_TO_FIRST:
+      return {
+        ...state,
+        pageNumber: 1
+      };
+    case TYPES.MOVE_TO_LAST: {
+      const { pageNumber, pageSize, itemsCount } = state;
+
+      const newPageNumber = Math.ceil(itemsCount / pageSize);
+
+      if (newPageNumber === pageNumber) {
+        return state;
+      }
+
+      return {
+        ...state,
+        pageNumber: newPageNumber
+      };
+    }
+    case TYPES.MOVE_TO_NEXT: {
+      const { pageNumber, pageSize, itemsCount } = state;
+
+      const newPageNumber = pageNumber + 1;
+
+      if (newPageNumber > Math.ceil(itemsCount / pageSize)) {
+        return state;
+      }
+
+      return {
+        ...state,
+        pageNumber: newPageNumber
+      };
+    }
+    case TYPES.MOVE_TO_PREV: {
+      const { pageNumber } = state;
+      const newPageNumber = pageNumber - 1;
+
+      if (newPageNumber <= 0 || pageNumber === newPageNumber) {
+        return state;
+      }
+
+      return {
+        ...state,
+        pageNumber: newPageNumber
+      };
+    }
+    case TYPES.SET_ITEMS_COUNT:
       return {
         ...state,
         itemsCount: action.payload
       };
-    case SET_PAGE_SIZE:
+    case TYPES.SET_PAGE_SIZE:
       return {
         ...state,
         pageNumber: 1,

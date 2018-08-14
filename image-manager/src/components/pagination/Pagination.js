@@ -2,6 +2,8 @@ import React from 'react';
 
 import './Pagination.css';
 
+const RADIX = 10;
+
 export default props => {
   const {
     pageSize,
@@ -13,14 +15,25 @@ export default props => {
   } = props;
 
   const { onNext, onPrev, onFirst, onLast } = props;
-  
+
   const pagesCount = Math.ceil(itemsCount / pageSize);
 
   const inputProps = {
+    min: 1,
+    step: 1,
     size: 4,
     maxLength: 4,
+    type: 'number',
+    max: pagesCount,
     value: pageNumber,
-    onChange: onPageNumberChange
+    onChange: ({ target }) =>
+      onPageNumberChange(parseInt(target.value, RADIX) || pageNumber)
+  };
+
+  const selectProps = {
+    value: pageSize,
+    onChange: ({ target }) =>
+      onPageSizeChange(parseInt(target.value, RADIX) || pageSize)
   };
 
   const options = pageSizeOptions.map((opt, i) => (
@@ -52,11 +65,7 @@ export default props => {
             </span>
           </td>
           <td>
-            <select
-              className="page-size"
-              value={pageSize}
-              onChange={onPageSizeChange}
-            >
+            <select className="page-size" {...selectProps}>
               {options}
             </select>
           </td>

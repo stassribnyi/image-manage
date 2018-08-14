@@ -7,7 +7,7 @@ import {
   editImage,
   updateImage,
   addImage
-} from '../../../actions/imageActions';
+} from '../../../actions/currentImageAction';
 import { showModal, closeModal } from '../../../actions/modalActions';
 
 import imagePlaceholderDefault from '../../../assets/image-placeholder.svg';
