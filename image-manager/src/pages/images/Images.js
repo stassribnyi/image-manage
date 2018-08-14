@@ -87,7 +87,7 @@ class Images extends Component {
         {...image}
         onDelete={() => this.handleDeleteImage(image.id)}
         onPreview={() =>
-          this.props.showPreview(<Preview {...this.props.image} />)
+          this.props.showPreview(<Preview {...image} />)
         }
       />
     ));
