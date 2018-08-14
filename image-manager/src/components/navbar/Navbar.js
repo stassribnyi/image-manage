@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+
 import logoPath from '../../assets/logo.png';
 
 import './Navbar.css';
@@ -11,17 +12,15 @@ export default class Navigation extends Component {
     this.state = {
       collapsed: true
     };
-
-    this.toggleCollapse = this.toggleCollapse.bind(this);
   }
 
-  toggleCollapse() {
+  toggleCollapse = () => {
     this.setState(prevState => {
       return {
         collapsed: !prevState.collapsed
       };
     });
-  }
+  };
 
   render() {
     const navClass = this.state.collapsed ? 'collapse' : '';

@@ -28,17 +28,23 @@ export default class Preview extends Component {
       }
     };
 
+    const tooltipClass = `preview-image-tooltip ${
+      this.state.showTooltip ? 'active' : ''
+    }`;
+
+    const tooltipIcon = showTooltip ? (
+      <span
+        title={tooltip}
+        tabIndex="-1"
+        className={tooltipClass}
+        onClick={this.toggleTooltip}
+      />
+    ) : null;
+
     return (
       <div className="position-relative preview-image-container text-center">
         <span className="preview-image" {...bgImage} />
-        {showTooltip ? (
-          <span
-            className={`preview-image-tooltip ${this.state.showTooltip ? 'active' : ''}`}
-            tabIndex="-1"
-            title={tooltip}
-            onClick={this.toggleTooltip}
-          />
-        ) : null}
+        {tooltipIcon}
       </div>
     );
   }

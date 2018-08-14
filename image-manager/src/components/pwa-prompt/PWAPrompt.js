@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import './PWAPrompt.css';
 
+const BEFORE_INSTALL_PROMPT = 'beforeinstallprompt';
+
 export default class PWAPrompt extends Component {
   constructor(props) {
     super(props);
@@ -9,40 +11,34 @@ export default class PWAPrompt extends Component {
     this.state = {
       visible: false
     };
-
-    this.handleBeforeInstallPropmpt = this.handleBeforeInstallPropmpt.bind(
-      this
-    );
-    this.handleYesClick = this.handleYesClick.bind(this);
-    this.handleNoClick = this.handleNoClick.bind(this);
   }
 
   componentWillMount() {
     window.addEventListener(
-      'beforeinstallprompt',
+      BEFORE_INSTALL_PROMPT,
       this.handleBeforeInstallPropmpt
     );
   }
 
   componentWillUnmount() {
     window.removeEventListener(
-      'beforeinstallprompt',
+      BEFORE_INSTALL_PROMPT,
       this.handleBeforeInstallPropmpt
     );
   }
 
-  handleBeforeInstallPropmpt(e) {
+  handleBeforeInstallPropmpt = event => {
     // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.preventDefault();
+    event.preventDefault();
 
     // Stash the event so it can be triggered later.
     this.setState({
-      deferredPrompt: e,
+      deferredPrompt: event,
       visible: true
     });
-  }
+  };
 
-  handleYesClick() {
+  handleYesClick = () => {
     // hide our user interface that shows our A2HS button
     this.setState({ visible: false });
 
@@ -65,14 +61,14 @@ export default class PWAPrompt extends Component {
 
       this.setState({ deferredPrompt: null });
     });
-  }
+  };
 
-  handleNoClick() {
+  handleNoClick = () => {
     this.setState({
       visible: false,
       deferredPrompt: null
     });
-  }
+  };
 
   render() {
     if (!this.state.visible) {

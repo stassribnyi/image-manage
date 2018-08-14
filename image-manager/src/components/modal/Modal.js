@@ -10,6 +10,18 @@ const Modal = ({ modal }) => {
   const modalClass = show ? 'show d-block' : 'd-none';
   const backdropClass = show ? 'show' : 'd-none';
 
+  const submitBtn = onSubmit ? (
+    <button type="button" className="btn btn-primary" onClick={onSubmit}>
+      {submitName}
+    </button>
+  ) : null;
+
+  const closeBtn = onClose ? (
+    <button type="button" className="btn btn-secondary" onClick={onClose}>
+      {closeName}
+    </button>
+  ) : null;
+
   return (
     <div>
       <div className={`modal ${modalClass}`} tabIndex="-1" role="dialog">
@@ -28,24 +40,8 @@ const Modal = ({ modal }) => {
             </div>
             <div className="modal-body">{body}</div>
             <div className="modal-footer">
-              {onSubmit ? (
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={onSubmit}
-                >
-                  {submitName}
-                </button>
-              ) : null}
-              {onClose ? (
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={onClose}
-                >
-                  {closeName}
-                </button>
-              ) : null}
+              {submitBtn}
+              {closeBtn}
             </div>
           </div>
         </div>

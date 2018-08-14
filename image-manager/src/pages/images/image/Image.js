@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  fetchImage,
-  resetImage,
-  editImage,
-  updateImage,
-  addImage
-} from '../../../actions/currentImageAction';
-import { showModal, closeModal } from '../../../actions/modalActions';
+import * as imageActions from '../../../actions/currentImageAction';
+import { showPreview } from '../../../actions/previewModalActions';
 
 import imagePlaceholderDefault from '../../../assets/image-placeholder.svg';
 
 import Preview from '../../../components/preview';
 
 import './Image.css';
+
+const TooltipRow = props => {
+  return (
+    <div className="form-group row">
+      <label
+        htmlFor="tooltip"
+        className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-form-label"
+      >
+        Tooltip
+      </label>
+      <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+        <input
+          id="tooltip"
+          name="tooltip"
+          type="text"
+          className="form-control"
+          placeholder="Some tooltip"
+          required
+          value={props.tooltip}
+          onChange={props.onChange}
+        />
+      </div>
+    </div>
+  );
+};
 
 class Image extends Component {
   componentDidMount() {
@@ -86,14 +105,10 @@ class Image extends Component {
     reader.readAsDataURL(file);
   };
 
-  handlePreviewImage = image => {
-    const { showTooltip, tooltip, url } = image;
-    this.props.showModal({
-      title: 'Preview',
-      closeName: 'Close',
-      onClose: () => this.props.closeModal(),
-      body: <Preview url={url} tooltip={tooltip} showTooltip={showTooltip} />
-    });
+  showPreview = event => {
+    event.preventDefault();
+
+    this.props.showPreview(<Preview {...this.props.image} />);
   };
 
   render() {
@@ -105,6 +120,10 @@ class Image extends Component {
         backgroundImage: `url("${imagePlaceholder}")`
       }
     };
+
+    const tooltipRow = image.showTooltip ? (
+      <TooltipRow tooltip={image.tooltip} onChange={this.handleChange} />
+    ) : null;
 
     const submitBtnName = image.id !== undefined ? 'Update' : 'Upload';
 
@@ -155,39 +174,12 @@ class Image extends Component {
                     </div>
                   </div>
                 </div>
-                {image.showTooltip ? (
-                  <div className="form-group row">
-                    <label
-                      htmlFor="tooltip"
-                      className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-form-label"
-                    >
-                      Tooltip
-                    </label>
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
-                      <input
-                        id="tooltip"
-                        name="tooltip"
-                        type="text"
-                        className="form-control"
-                        placeholder="Some tooltip"
-                        required
-                        value={image.tooltip}
-                        onChange={this.handleChange}
-                      />
-                    </div>
-                  </div>
-                ) : null}
+                {tooltipRow}
                 <div className="form-group row">
                   <div className="col">
                     <button
                       className="btn btn-info float-right"
-                      onClick={e => {
-                        e.preventDefault();
-                        this.handlePreviewImage({
-                          ...image,
-                          url: imagePlaceholder
-                        });
-                      }}
+                      onClick={this.showPreview}
                     >
                       Preview
                     </button>
@@ -212,15 +204,12 @@ const mapStateToProps = state => ({
   image: state.currentImage
 });
 
+const mapDispatchToProps = {
+  ...imageActions,
+  showPreview
+};
+
 export default connect(
   mapStateToProps,
-  {
-    fetchImage,
-    resetImage,
-    editImage,
-    updateImage,
-    addImage,
-    closeModal,
-    showModal
-  }
+  mapDispatchToProps
 )(Image);

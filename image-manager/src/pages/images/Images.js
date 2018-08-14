@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { showModal, closeModal } from '../../actions/modalActions';
+import { showPreview } from '../../actions/previewModalActions';
 import { fetchImages, deleteImage } from '../../actions/imagesActions';
 import * as paginationActions from '../../actions/paginationActions';
 
@@ -13,22 +13,26 @@ import Pagination from '../../components/pagination';
 import './Images.css';
 
 const ImageTableTr = props => {
+  const { id, tooltip, url } = props;
+  const { onPreview, onDelete } = props;
+
+  const imageStyle = {
+    style: { backgroundImage: `url("${url}")` }
+  };
+
   return (
     <tr>
-      <td>{props.id}</td>
+      <td>{id}</td>
       <td>
-        <span className="image-container" onClick={props.onPreview}>
-          <span
-            className="image"
-            style={{ backgroundImage: `url("${props.url}")` }}
-          />
+        <span className="image-container" onClick={onPreview}>
+          <span className="image" {...imageStyle} />
         </span>
       </td>
-      <td>{props.tooltip}</td>
+      <td>{tooltip}</td>
       <td>
-        <NavLink to={`edit/${props.id}`}>Edit</NavLink>
+        <NavLink to={`edit/${id}`}>Edit</NavLink>
       </td>
-      <td className="text-danger delete-image" onClick={props.onDelete}>
+      <td className="text-danger delete-image" onClick={onDelete}>
         Delete
       </td>
     </tr>
@@ -64,27 +68,17 @@ class Images extends Component {
     }
   };
 
-  handlePreviewImage = image => {
-    const { showTooltip, tooltip, url } = image;
-    this.props.showModal({
-      title: 'Preview',
-      closeName: 'Close',
-      onClose: () => this.props.closeModal(),
-      body: <Preview url={url} tooltip={tooltip} showTooltip={showTooltip} />
-    });
-  };
-
   render() {
     const { images, pagination } = this.props;
 
     const paginationConfig = {
       ...pagination,
-      onPageNumberChange: this.props.moveToPage,
-      onPageSizeChange: this.props.setPageSize,
       onNext: this.props.moveToNext,
       onPrev: this.props.moveToPrev,
+      onLast: this.props.moveToLast,
       onFirst: this.props.moveToFirst,
-      onLast: this.props.moveToLast
+      onPageSizeChange: this.props.setPageSize,
+      onPageNumberChange: this.props.moveToPage
     };
 
     const trs = images.map((image, i) => (
@@ -92,7 +86,9 @@ class Images extends Component {
         key={image.id}
         {...image}
         onDelete={() => this.handleDeleteImage(image.id)}
-        onPreview={() => this.handlePreviewImage(image)}
+        onPreview={() =>
+          this.props.showPreview(<Preview {...this.props.image} />)
+        }
       />
     ));
 
@@ -135,8 +131,7 @@ const mapDispatchToProps = {
   ...paginationActions,
   deleteImage,
   fetchImages,
-  showModal,
-  closeModal
+  showPreview
 };
 
 export default connect(
