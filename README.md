@@ -1,5 +1,7 @@
 # Image Manager
 
+[Live Demo](https://stassribnyi.github.io/image-manager/)
+
 To run this app locally, please follow steps below:
 
 ```sh
