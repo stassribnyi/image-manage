@@ -22,7 +22,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "serve": "npm start | json-server image-source.json"
+    "serve": "npm start | json-server image-source.json",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
@@ -30,5 +32,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "https://stassribnyi.github.io/image-manage/"
+  "homepage": "https://stassribnyi.github.io/image-manager"
 }
