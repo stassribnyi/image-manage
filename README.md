@@ -10,4 +10,4 @@ npm install
 npm run serve
 ```
 
-Then open http://localhost:3000/ to see app.
+Then open http://localhost:3000/ to see the app.
