@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "serve": "npm start | json-server db.json",
+    "serve": "npm start | json-server image-source.json",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
