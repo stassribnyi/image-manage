@@ -13,6 +13,10 @@ export default class Navigation extends Component {
     };
   }
 
+  resetCollapse = () => {
+    this.setState({ collapsed: true });
+  };
+
   toggleCollapse = () => {
     this.setState(prevState => {
       return {
@@ -46,7 +50,7 @@ export default class Navigation extends Component {
           to="/"
           icon="home"
           className="navbar-brand"
-          onClick={this.toggleCollapse}
+          onClick={this.resetCollapse}
         />
         <button
           className="navbar-toggler"
@@ -68,7 +72,7 @@ export default class Navigation extends Component {
                   icon={route.icon}
                   name={route.name}
                   className="nav-link"
-                  onClick={this.toggleCollapse}
+                  onClick={this.resetCollapse}
                 />
               </li>
             ))}
