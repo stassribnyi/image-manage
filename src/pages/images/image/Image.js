@@ -4,32 +4,23 @@ import { connect } from 'react-redux';
 import * as imageActions from '../../../actions/currentImageAction';
 import { showPreview } from '../../../actions/previewModalActions';
 
-import imagePlaceholderDefault from '../../../assets/image-placeholder.svg';
+import imagePlaceholderDefault from '../../../assets/placeholder.png';
 
 import Preview from '../../../components/preview';
 
 import './Image.css';
 
-const TooltipRow = props => {
+const AttrRow = props => {
   return (
     <div className="form-group row">
       <label
-        htmlFor="tooltip"
-        className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-form-label"
+        htmlFor={props.htmlFor}
+        className="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-form-label"
       >
-        Tooltip
+        {props.name}
       </label>
-      <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
-        <input
-          id="tooltip"
-          name="tooltip"
-          type="text"
-          className="form-control"
-          placeholder="Some tooltip"
-          required
-          value={props.tooltip}
-          onChange={props.onChange}
-        />
+      <div className="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+        {props.children}
       </div>
     </div>
   );
@@ -113,6 +104,9 @@ class Image extends Component {
 
   render() {
     const { image } = this.props;
+
+    const isNew = image.id === undefined;
+    const isPreviewPossible = !image.url;
     const imagePlaceholder = image.url || imagePlaceholderDefault;
 
     const placeholderStyle = {
@@ -121,66 +115,71 @@ class Image extends Component {
       }
     };
 
-    const tooltipRow = image.showTooltip ? (
-      <TooltipRow tooltip={image.tooltip} onChange={this.handleChange} />
+    const imageRow = isNew ? (
+      <AttrRow htmlFor="image" name="Image">
+        <input
+          required
+          id="image"
+          type="file"
+          name="image"
+          accept="image/*"
+          className="form-control"
+          onChange={this.handleFileChange}
+        />
+      </AttrRow>
     ) : null;
 
-    const submitBtnName = image.id !== undefined ? 'Update' : 'Upload';
+    const tooltipRow = image.showTooltip ? (
+      <AttrRow htmlFor="tooltip" name="Tooltip">
+        <input
+          id="tooltip"
+          name="tooltip"
+          type="text"
+          className="form-control"
+          placeholder="Some tooltip"
+          required
+          value={image.tooltip}
+          onChange={this.handleChange}
+        />
+      </AttrRow>
+    ) : null;
+
+    const submitBtnName = isNew ? 'Upload' : 'Update';
 
     return (
       <div className="row justify-content-center">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div className="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-6">
           <div className="card">
-            <div className="card-img-top">
-              <span className="placeholder" {...placeholderStyle} />
-            </div>
             <div className="card-body">
               <form onSubmit={this.handleSubmit}>
-                {!image.url ? (
-                  <div className="form-group row">
-                    <label
-                      htmlFor="image"
-                      className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-form-label"
-                    >
-                      Image
-                    </label>
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
-                      <input
-                        id="image"
-                        name="image"
-                        type="file"
-                        accept="image/*"
-                        className="form-control"
-                        required
-                        onChange={this.handleFileChange}
-                      />
+                <div className="form-group row image-row">
+                  <div className="col image-col">
+                    <div className="placeholder-container">
+                      <span className="placeholder" {...placeholderStyle} />
                     </div>
                   </div>
-                ) : null}
-                <div className="form-group row">
-                  <div className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2">
-                    <label className="form-check-label" htmlFor="showTooltip">
-                      Show tooltip
-                    </label>
-                  </div>
-                  <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
-                    <div className="form-check">
-                      <input
-                        id="showTooltip"
-                        name="showTooltip"
-                        className="form-check-input"
-                        type="checkbox"
-                        checked={image.showTooltip}
-                        onChange={this.handleChange}
-                      />
-                    </div>
+                  <div className="col image-attrs-col">
+                    {imageRow}
+                    <AttrRow htmlFor="showTooltip" name="Show tooltip">
+                      <div className="form-check">
+                        <input
+                          type="checkbox"
+                          id="showTooltip"
+                          name="showTooltip"
+                          className="form-check-input"
+                          checked={image.showTooltip}
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                    </AttrRow>
+                    {tooltipRow}
                   </div>
                 </div>
-                {tooltipRow}
                 <div className="form-group row">
                   <div className="col">
                     <button
                       className="btn btn-info float-right"
+                      disabled={isPreviewPossible}
                       onClick={this.showPreview}
                     >
                       Preview
