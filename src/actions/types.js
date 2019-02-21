@@ -20,3 +20,6 @@ export const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const SHOW_MODAL = 'SHOW_MODAL';
 
+// Loader actions
+export const SHOW_LOADER = 'SHOW_LOADER';
+export const HIDE_LOADER = 'HIDE_LOADER';

@@ -1,3 +1,7 @@
+.App {
+  position: relative;
+}
+
 .app-container {
   margin-top: 80px;
 }

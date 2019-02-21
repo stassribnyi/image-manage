@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Modal from '../components/modal';
+import Loader from '../components/loader';
 import Navbar from '../components/navbar';
 import PWAPrompt from '../components/pwa-prompt';
 
@@ -8,7 +9,8 @@ import './App.css';
 
 export default props => {
   return (
-    <div>
+    <div className="App">
+      <Loader />
       <Navbar />
       <div className="container-fluid app-container">
         <div className="row">

@@ -65,7 +65,7 @@ class Image extends Component {
 
     response.then(_ => this.props.history.push('/'));
 
-    // TODO Need to find better solution as push doen't call listen callback
+    // TODO Need to find better solution as push doesn't call listen callback
     this.props.resetImage();
   };
 
@@ -136,25 +136,27 @@ class Image extends Component {
             </div>
             <div className="card-body">
               <form onSubmit={this.handleSubmit}>
-                <div className="form-group row">
-                  <label
-                    htmlFor="image"
-                    className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-form-label"
-                  >
-                    Image
-                  </label>
-                  <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
-                    <input
-                      id="image"
-                      name="image"
-                      type="file"
-                      accept="image/*"
-                      className="form-control"
-                      required
-                      onChange={this.handleFileChange}
-                    />
+                {!image.url ? (
+                  <div className="form-group row">
+                    <label
+                      htmlFor="image"
+                      className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-form-label"
+                    >
+                      Image
+                    </label>
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+                      <input
+                        id="image"
+                        name="image"
+                        type="file"
+                        accept="image/*"
+                        className="form-control"
+                        required
+                        onChange={this.handleFileChange}
+                      />
+                    </div>
                   </div>
-                </div>
+                ) : null}
                 <div className="form-group row">
                   <div className="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2">
                     <label className="form-check-label" htmlFor="showTooltip">
