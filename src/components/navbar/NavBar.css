@@ -1,0 +1,18 @@
+.navbar {
+  padding: 10px 16px;
+}
+
+.navbar .navbar-brand {
+  padding: 0;
+}
+
+.navbar .nav-link.active:hover,
+.navbar .navbar-brand.active:hover {
+  color: #00bc8c;
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse {
+    margin-top: 4px;
+  }
+}
