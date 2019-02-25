@@ -10,16 +10,41 @@ import {
   HIDE_LOADER
 } from './types';
 
+import { error, success } from 'react-notification-system-redux';
+
+function getImageErrorMessage(message) {
+  return {
+    title: 'Error!',
+    message
+  };
+}
+
+function getImageSuccessMessage(message) {
+  return {
+    title: 'Success!',
+    message
+  };
+}
+
 export const addImage = image => dispatch => {
   dispatch({ type: SHOW_LOADER });
 
   return imageApi
     .addImage(image)
-    .then(response =>
+    .then(response => {
       dispatch({
         type: ADD_IMAGE,
         payload: response.data
-      })
+      });
+
+      dispatch(
+        success(getImageSuccessMessage('The image was successfully added.'))
+      );
+    })
+    .catch(() =>
+      dispatch(
+        error(getImageErrorMessage('An error occurred while adding image.'))
+      )
     )
     .finally(() => dispatch({ type: HIDE_LOADER }));
 };
@@ -42,6 +67,11 @@ export const fetchImage = id => dispatch => {
         payload: response.data
       })
     )
+    .catch(() =>
+      dispatch(
+        error(getImageErrorMessage('An error occurred while loading image.'))
+      )
+    )
     .finally(() => dispatch({ type: HIDE_LOADER }));
 };
 
@@ -56,11 +86,15 @@ export const updateImage = image => dispatch => {
 
   return imageApi
     .updateImage(image)
-    .then(response =>
+    .then(response => {
       dispatch({
         type: UPDATE_IMAGE,
         payload: response.data
-      })
-    )
+      });
+
+      dispatch(
+        success(getImageSuccessMessage('The image was successfully updated.'))
+      );
+    })
     .finally(() => dispatch({ type: HIDE_LOADER }));
 };

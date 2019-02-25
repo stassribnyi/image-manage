@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import * as paginationActions from '../../actions/paginationActions';
 
 import './NavBar.css';
 
 import NavItem from './NavItem';
 
-export default class Navigation extends Component {
+class Navigation extends Component {
   constructor(props) {
     super(props);
 
@@ -13,8 +16,10 @@ export default class Navigation extends Component {
     };
   }
 
-  resetCollapse = () => {
+  resetState = () => {
     this.setState({ collapsed: true });
+
+    this.props.resetPagination();
   };
 
   toggleCollapse = () => {
@@ -50,7 +55,7 @@ export default class Navigation extends Component {
           to="/"
           icon="home"
           className="navbar-brand"
-          onClick={this.resetCollapse}
+          onClick={this.resetState}
         />
         <button
           className="navbar-toggler"
@@ -72,7 +77,7 @@ export default class Navigation extends Component {
                   icon={route.icon}
                   name={route.name}
                   className="nav-link"
-                  onClick={this.resetCollapse}
+                  onClick={this.resetState}
                 />
               </li>
             ))}
@@ -82,3 +87,12 @@ export default class Navigation extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  resetPagination: paginationActions.moveToFirst
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Navigation);

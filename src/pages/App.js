@@ -4,6 +4,7 @@ import Modal from '../components/modal';
 import Loader from '../components/loader';
 import Navbar from '../components/navbar';
 import PWAPrompt from '../components/pwa-prompt';
+import AppNotifications from '../components/notifications';
 
 import './App.css';
 
@@ -21,6 +22,7 @@ export default props => {
       </div>
       <Modal />
       <PWAPrompt />
+      <AppNotifications />
     </div>
   );
 };

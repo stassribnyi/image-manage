@@ -8,6 +8,22 @@ import {
   HIDE_LOADER
 } from './types';
 
+import { success, error } from 'react-notification-system-redux';
+
+function getImagesErrorMessage(message) {
+  return {
+    title: 'Error!',
+    message
+  };
+}
+
+function getImageSuccessMessage(message) {
+  return {
+    title: 'Success!',
+    message
+  };
+}
+
 export const fetchImages = (start, limit) => dispatch => {
   dispatch({ type: SHOW_LOADER });
 
@@ -24,6 +40,11 @@ export const fetchImages = (start, limit) => dispatch => {
         payload: parseInt(response.headers['x-total-count'] || 0, 10)
       });
     })
+    .catch(() =>
+      dispatch(
+        error(getImagesErrorMessage('An error occurred while loading images.'))
+      )
+    )
     .finally(() => dispatch({ type: HIDE_LOADER }));
 };
 
@@ -32,11 +53,20 @@ export const deleteImage = id => dispatch => {
 
   imageApi
     .deleteImage(id)
-    .then(() =>
+    .then(() => {
       dispatch({
         type: DELETE_IMAGE,
         payload: id
-      })
+      });
+
+      dispatch(
+        success(getImageSuccessMessage('The image was successfully deleted.'))
+      );
+    })
+    .catch(() =>
+      dispatch(
+        error(getImagesErrorMessage('An error occurred while deleting image.'))
+      )
     )
     .finally(() => dispatch({ type: HIDE_LOADER }));
 };

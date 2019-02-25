@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 
+import { reducer as notificationsReducer } from 'react-notification-system-redux';
+
 import modalReducer from './modalReducer';
 import imagesReducer from './imagesReducer';
 import loaderReducer from './loaderReducer';
@@ -11,5 +13,6 @@ export default combineReducers({
   images: imagesReducer,
   loader: loaderReducer,
   pagination: paginationReducer,
-  currentImage: currentImageReducer
+  currentImage: currentImageReducer,
+  notifications: notificationsReducer
 });
