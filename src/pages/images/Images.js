@@ -22,13 +22,13 @@ const ImageTableTr = props => {
 
   return (
     <tr>
-      <td>{id}</td>
+      <td data-cell-name="#: ">{id}</td>
       <td>
         <span className="image-container" onClick={onPreview}>
           <span className="image" {...imageStyle} />
         </span>
       </td>
-      <td>{tooltip}</td>
+      <td data-cell-name="Tooltip: ">{tooltip}</td>
       <td>
         <NavLink to={`edit/${id}`}>Edit</NavLink>
       </td>
@@ -86,16 +86,14 @@ class Images extends Component {
         key={image.id}
         {...image}
         onDelete={() => this.handleDeleteImage(image.id)}
-        onPreview={() =>
-          this.props.showPreview(<Preview {...image} />)
-        }
+        onPreview={() => this.props.showPreview(<Preview {...image} />)}
       />
     ));
 
     return (
       <div className="row">
         <div className="col">
-          <div className="responsive-image-table">
+          <div className="responsive-table">
             <table className="table table-striped image-table">
               <thead className="bg-success image-thead">
                 <tr>
