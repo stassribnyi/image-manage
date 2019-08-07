@@ -1,0 +1,15 @@
+.image-cell img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+
+  border: 1px solid #33333369;
+
+  background: #fff;
+  border-radius: 3px;
+}
+
+.image-cell {
+  min-height: 150px;
+  overflow: hidden;
+}

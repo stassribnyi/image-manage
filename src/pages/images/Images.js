@@ -11,6 +11,7 @@ import Preview from '../../components/preview';
 import Pagination from '../../components/pagination';
 
 import './Images.css';
+import { Gallery } from './gallery';
 
 const ImageTableTr = props => {
   const { id, tooltip, url } = props;
@@ -69,6 +70,8 @@ class Images extends Component {
   };
 
   render() {
+    return <Gallery elements={this.props.images} />;
+
     const { images, pagination } = this.props;
 
     const paginationConfig = {
