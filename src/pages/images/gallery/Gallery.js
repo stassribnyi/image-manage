@@ -7,29 +7,28 @@ const masonryOptions = {
   transitionDuration: 0
 };
 
-const imagesLoadedOptions = { background: '.my-bg-image-el' };
+const imagesLoadedOptions = { background: '.some-class-with-bg-image' };
 
 class Gallery extends Component {
   render() {
     const childElements = this.props.elements.map(function(element) {
       return (
-        <div
-          key={element.url}
-          className="col-lg-3 col-md-4 col-sm-6 col-xs-12 image-cell"
-        >
-          <img src={element.url} />
+        <div className="column image-container is-one-third" key={element.url}>
+          <figure className="image-cell has-background-white">
+            <img src={element.url} />
+          </figure>
         </div>
       );
     });
 
     return (
       <Masonry
-        className="row" // default ''
-        elementType="div" // default 'div'
-        options={masonryOptions} // default {}
-        disableImagesLoaded={false} // default false
-        updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-        imagesLoadedOptions={imagesLoadedOptions} // default {}
+        className="gallery columns is-variable is-2"
+        elementType="div"
+        options={masonryOptions}
+        disableImagesLoaded={false}
+        updateOnEachImageLoad={false}
+        imagesLoadedOptions={imagesLoadedOptions}
       >
         {childElements}
       </Masonry>

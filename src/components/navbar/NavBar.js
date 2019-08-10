@@ -50,40 +50,86 @@ class Navigation extends Component {
     ];
 
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
-        <NavItem
-          to="/"
-          icon="home"
-          className="navbar-brand"
-          onClick={this.resetState}
-        />
-        <button
-          className="navbar-toggler"
-          type="button"
-          aria-expanded="false"
-          aria-controls="navbarDefault"
-          aria-label="Toggle navigation"
-          onClick={this.toggleCollapse}
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-
-        <div className={navClass}>
-          <ul className="navbar-nav ml-auto">
-            {routes.map((route, i) => (
-              <li key={i}>
-                <NavItem
-                  to={route.to}
-                  icon={route.icon}
-                  name={route.name}
-                  className="nav-link"
-                  onClick={this.resetState}
-                />
-              </li>
-            ))}
-          </ul>
+      <header class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns center-column">
+              <div class="column is-half">
+                <h1 class="title center-column">
+                  <span class="title is-4 has-text-white">Welcome to</span>
+                  <span class="title is-3 has-text-white">
+                    Cats Photo Gallery
+                  </span>
+                </h1>
+                <h2 class="title is-5 has-text-white has-text-centered">
+                  Here you will find lots of cat's photos from professional
+                  photographers all around the globe
+                </h2>
+              </div>
+            </div>
+          </div>
         </div>
-      </nav>
+        <nav class="hero-foot">
+          <ul class="level">
+            <li class="level-item">
+              <a
+                class="button is-info is-outlined is-inverted is-rounded"
+                href=""
+              >
+                All
+              </a>
+            </li>
+            <li class="level-item">
+              <a
+                class="button is-info is-outlined is-inverted is-rounded"
+                href=""
+              >
+                Favorites
+              </a>
+            </li>
+            <li class="level-item">
+              <a
+                class="button is-info is-outlined is-inverted is-rounded"
+                href=""
+              >
+                Last week up voted
+              </a>
+            </li>
+            <li class="level-item">
+              <a
+                class="button is-info is-outlined is-inverted is-rounded"
+                href=""
+              >
+                Animals
+              </a>
+            </li>
+            <li class="level-item">
+              <a
+                class="button is-info is-outlined is-inverted is-rounded"
+                href=""
+              >
+                Cars
+              </a>
+            </li>
+            <li class="level-item">
+              <a
+                class="button is-info is-outlined is-inverted is-rounded"
+                href=""
+              >
+                Contacts
+              </a>
+            </li>
+            <li class="level-item">
+              <a
+                class="button is-info is-outlined is-inverted is-rounded"
+                href=""
+              >
+                About
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
     );
   }
 }

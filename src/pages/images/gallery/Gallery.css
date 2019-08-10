@@ -1,15 +1,22 @@
+
+.gallery {
+  width: 80%;
+}
+
 .image-cell img {
   width: 100%;
   height: auto;
-  margin-bottom: 20px;
-
-  border: 1px solid #33333369;
-
-  background: #fff;
-  border-radius: 3px;
+  display: block;
 }
 
 .image-cell {
+  width: 100%;
   min-height: 150px;
   overflow: hidden;
+
+  border: 0.35rem outset #555;
+}
+
+.image-container {
+  width: 100%;
 }

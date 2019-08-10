@@ -11,18 +11,14 @@ import './App.css';
 export default props => {
   return (
     <div className="App">
-      <Loader />
+      {/* <Loader /> */}
       <Navbar />
-      <div className="container-fluid app-container">
-        <div className="row">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            {props.children}
-          </div>
-        </div>
-      </div>
-      <Modal />
-      <PWAPrompt />
-      <AppNotifications />
+      <section className="section">
+        <div className="container center">{props.children}</div>
+      </section>
+      {/* <Modal /> */}
+      {/* <PWAPrompt /> */}
+      {/* <AppNotifications /> */}
     </div>
   );
 };

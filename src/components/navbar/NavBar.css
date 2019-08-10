@@ -1,18 +1,19 @@
-.navbar {
-  padding: 10px 16px;
+.hero {
+  min-height: 50vh;
 }
 
-.navbar .navbar-brand {
-  padding: 0;
+.hero-body {
+  padding-top: 5rem;
 }
 
-.navbar .nav-link.active:hover,
-.navbar .navbar-brand.active:hover {
-  color: #00bc8c;
+.hero-foot .level {
+  justify-content: center;
 }
 
-@media (max-width: 767px) {
-  .navbar-collapse {
-    margin-top: 4px;
-  }
+.hero-foot .level > .level-item {
+  flex-grow: 0;
+}
+
+.hero-foot .level > .level-item:not(:last-child) {
+  margin-right: 1rem;
 }

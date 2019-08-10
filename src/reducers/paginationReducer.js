@@ -6,7 +6,7 @@ const DEFAULT_PAGE_SIZE_OPTIONS = [1, DEFAULT_PAGE_SIZE, 25, 50];
 const initialState = {
   pageNumber: 1,
   itemsCount: 1,
-  pageSize: 50,
+  pageSize: 300,
   pageSizeOptions: DEFAULT_PAGE_SIZE_OPTIONS
 };
 

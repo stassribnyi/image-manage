@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 
+import "bulma/css/bulma.min.css";
 import "./index.css";
 
 import store from "./store";
