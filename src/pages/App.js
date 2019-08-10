@@ -1,10 +1,12 @@
 import React from 'react';
 
-import Modal from '../components/modal';
-import Loader from '../components/loader';
-import Navbar from '../components/navbar';
-import PWAPrompt from '../components/pwa-prompt';
-import AppNotifications from '../components/notifications';
+import {
+  NavBar,
+  Modal,
+  Loader,
+  PWAPrompt,
+  AppNotifications
+} from '../components';
 
 import './App.css';
 
@@ -12,7 +14,7 @@ export default props => {
   return (
     <div className="App">
       {/* <Loader /> */}
-      <Navbar />
+      <NavBar />
       <section className="section">
         <div className="container center">{props.children}</div>
       </section>
