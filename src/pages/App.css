@@ -1,0 +1,10 @@
+.App {
+  position: relative;
+}
+
+.App .new-image {
+  position: fixed;
+  top: 100vh;
+  right: 1.75rem;
+  transform: translateY(calc(-100% - 1.75rem));
+}

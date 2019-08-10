@@ -4,17 +4,15 @@ import Masonry from 'react-masonry-component';
 import './Gallery.css';
 
 const masonryOptions = {
-  transitionDuration: 0
+  transitionDuration: 200
 };
 
-const imagesLoadedOptions = { background: '.some-class-with-bg-image' };
-
 export default ({ elements }) => {
-  const childElements = elements.map(function(element) {
+  const childElements = elements.map((element) => {
     return (
-      <div className="column image-container is-one-third" key={element.url}>
+      <div className="column image-container is-one-third" key={element.id}>
         <figure className="image-cell has-background-white">
-          <img src={element.url} />
+          <img src={element.url} alt={element.tooltip}/>
         </figure>
       </div>
     );
@@ -22,12 +20,9 @@ export default ({ elements }) => {
 
   return (
     <Masonry
-      className="gallery columns is-variable is-2"
       elementType="div"
+      className="gallery columns is-variable is-2"
       options={masonryOptions}
-      disableImagesLoaded={false}
-      updateOnEachImageLoad={false}
-      imagesLoadedOptions={imagesLoadedOptions}
     >
       {childElements}
     </Masonry>

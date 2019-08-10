@@ -11,7 +11,7 @@
 
 .image-cell {
   width: 100%;
-  min-height: 150px;
+  min-height: 7rem;
   overflow: hidden;
 
   border: 0.35rem outset #555;
@@ -19,4 +19,8 @@
 
 .image-container {
   width: 100%;
+}
+
+.some-class-with-bg-image {
+  background: red;
 }

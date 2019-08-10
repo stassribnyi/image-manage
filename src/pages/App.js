@@ -21,6 +21,9 @@ export default props => {
       {/* <Modal /> */}
       {/* <PWAPrompt /> */}
       {/* <AppNotifications /> */}
+      <a href="/new" className="button is-rounded new-image">
+        +
+      </a>
     </div>
   );
 };
