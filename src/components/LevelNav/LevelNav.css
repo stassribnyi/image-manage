@@ -1,0 +1,11 @@
+.level-nav {
+  justify-content: center;
+}
+
+.level-nav__item {
+  flex-grow: 0;
+}
+
+.level-nav__item:not(:last-child) {
+  margin-right: 1rem;
+}

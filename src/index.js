@@ -1,38 +1,39 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Provider } from "react-redux";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import "bulma/css/bulma.min.css";
-import "./index.css";
+import 'bulma/css/bulma.min.css';
+import './index.css';
 
-import store from "./store";
+import store from './store';
 
-import App from "./pages/App";
+import App from './pages/App';
 
-import { Images, Image } from "./pages/images";
+// import { Images, Image } from './pages/images';
+import MainPage from './pages/Main';
 
-import RouteWithSubRoutes from "./RouteWithSubRoutes";
+import RouteWithSubRoutes from './RouteWithSubRoutes';
 
-import registerServiceWorker from "./registerServiceWorker";
+import registerServiceWorker from './registerServiceWorker';
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     exact: true,
-    component: Images
+    component: MainPage
   },
-  {
-    path: "/new",
-    component: Image
-  },
-  {
-    path: "/edit/:id",
-    component: Image
-  }
+  // {
+  //   path: '/new',
+  //   component: Image
+  // },
+  // {
+  //   path: '/edit/:id',
+  //   component: Image
+  // }
 ];
 
-const root = document.getElementById("root");
+const root = document.getElementById('root');
 
 ReactDOM.render(
   <Router basename={process.env.PUBLIC_URL}>
