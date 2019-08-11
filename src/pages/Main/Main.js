@@ -2,6 +2,7 @@ import React from 'react';
 
 import Hero from './Hero';
 import Gallery from './Gallery';
+import { Images } from '../images';
 
 import './Main.css';
 
@@ -18,7 +19,7 @@ export default props => (
     <Hero links={links} />
     <section className="section">
       <div className="container center">
-        <Gallery />
+        <Images />
       </div>
     </section>
     <a href="/" className="button is-rounded go-up">

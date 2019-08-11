@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Masonry from 'react-masonry-component';
 
@@ -10,14 +11,20 @@ const masonryOptions = {
   transitionDuration: 200
 };
 
-export default ({ elements }) => (
+const Gallery = ({ images }) => (
   <Masonry
     elementType="div"
     className="gallery columns is-variable is-2"
     options={masonryOptions}
   >
-    {elements.map(img => (
+    {images.map(img => (
       <Figure key={img.id} {...img} />
     ))}
   </Masonry>
 );
+
+Gallery.propTypes = {
+  images: PropTypes.array.isRequired
+}
+
+export default Gallery;
