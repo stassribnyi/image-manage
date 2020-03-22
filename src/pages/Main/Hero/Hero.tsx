@@ -2,9 +2,15 @@ import React from 'react';
 
 import { LevelNav } from '../../../components/LevelNav';
 
-import './Hero.css';
+import './Hero.scss';
 
-export default props => (
+import { LevelNavProps } from '../../../components/LevelNav/LevelNav';
+
+export interface HeroProps {
+  readonly links: LevelNavProps['links'];
+}
+
+const Hero: React.FC<HeroProps> = ({ links }) => (
   <header className='hero'>
     <div className='hero-body'>
       <div className='container'>
@@ -25,7 +31,9 @@ export default props => (
       </div>
     </div>
     <nav className='hero-foot'>
-      <LevelNav links={props.links} />
+      <LevelNav links={links} />
     </nav>
   </header>
 );
+
+export default Hero;

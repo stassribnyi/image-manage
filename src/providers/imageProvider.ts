@@ -49,4 +49,4 @@ export class ImageProvider {
   };
 }
 
-export default new ImageProvider(axiosProvider);
+export const imageProvider = new ImageProvider(axiosProvider);

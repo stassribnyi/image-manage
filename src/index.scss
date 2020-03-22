@@ -1,0 +1,40 @@
+html {
+  background-color: #e8e8e8;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+
+  position: relative;
+
+  &::before {
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 100vh;
+
+    position: absolute;
+
+    content: '';
+    display: block;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.5), #e8e8e8),
+      #e8e8e8 url(assets/hero.jpg) center center / cover no-repeat fixed;
+  }
+}
+
+.center {
+  &,
+  &-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-column {
+    flex-direction: column;
+  }
+}

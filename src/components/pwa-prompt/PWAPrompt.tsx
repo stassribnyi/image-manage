@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 
-import './PWAPrompt.css';
+import './PWAPrompt.scss';
 
 const BEFORE_INSTALL_PROMPT = 'beforeinstallprompt';
 
-export default class PWAPrompt extends Component {
-  constructor(props) {
+export default class PWAPrompt extends Component<
+  {},
+  {
+    readonly visible: boolean;
+    readonly deferredPrompt: any;
+  }
+> {
+  constructor(props: any) {
     super(props);
 
     this.state = {
-      visible: false
+      visible: false,
+      deferredPrompt: null
     };
   }
 
@@ -27,7 +34,7 @@ export default class PWAPrompt extends Component {
     );
   }
 
-  handleBeforeInstallPropmpt = event => {
+  handleBeforeInstallPropmpt = (event: any) => {
     // Prevent Chrome 67 and earlier from automatically showing the prompt
     event.preventDefault();
 
@@ -52,7 +59,7 @@ export default class PWAPrompt extends Component {
     deferredPrompt.prompt();
 
     // Wait for the user to respond to the prompt
-    deferredPrompt.userChoice.then(choiceResult => {
+    deferredPrompt.userChoice.then((choiceResult: any) => {
       if (choiceResult.outcome === 'accepted') {
         console.log('User accepted the A2HS prompt');
       } else {
@@ -76,24 +83,24 @@ export default class PWAPrompt extends Component {
     }
 
     return (
-      <div className="pwa-prompt">
-        <div className="text-center">
-          <div className="container">
-            <div className="row">
-              <div className="col text-white">
+      <div className='pwa-prompt'>
+        <div className='text-center'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col text-white'>
                 <h4>Add app to the home screen?</h4>
               </div>
             </div>
-            <div className="row">
-              <div className="col text-white">
+            <div className='row'>
+              <div className='col text-white'>
                 <button
-                  className="btn btn-success mr-3"
+                  className='btn btn-success mr-3'
                   onClick={this.handleYesClick}
                 >
                   Yes
                 </button>
                 <button
-                  className="btn btn-warning"
+                  className='btn btn-warning'
                   onClick={this.handleNoClick}
                 >
                   No

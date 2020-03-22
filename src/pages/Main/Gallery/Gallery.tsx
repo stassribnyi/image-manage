@@ -1,20 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Masonry from 'react-masonry-component';
 
 import Figure from './Figure';
 
-import './Gallery.css';
+import { Image } from '../../../providers';
+
+import './Gallery.scss';
 
 const masonryOptions = {
   transitionDuration: 200
 };
 
-const Gallery = ({ images }) => (
+export interface GalleryProps {
+  readonly images: Array<Image>;
+}
+
+const Gallery: React.FC<GalleryProps> = ({ images }) => (
   <Masonry
-    elementType="div"
-    className="gallery columns is-variable is-2"
+    elementType='div'
+    className='gallery columns is-variable is-2'
     options={masonryOptions}
   >
     {images.map(img => (
@@ -22,9 +27,5 @@ const Gallery = ({ images }) => (
     ))}
   </Masonry>
 );
-
-Gallery.propTypes = {
-  images: PropTypes.array.isRequired
-}
 
 export default Gallery;
