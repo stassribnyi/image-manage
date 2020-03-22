@@ -2,7 +2,6 @@ import React from 'react';
 
 import Hero from './Hero';
 import Gallery from './Gallery';
-import { Images } from '../images';
 
 import './Main.css';
 
@@ -14,19 +13,21 @@ const links = [
   { to: '/with-humans', name: 'With humans' }
 ];
 
-export default props => (
+const MainPage: React.FC = props => (
   <>
     <Hero links={links} />
-    <section className="section">
-      <div className="container center">
-        <Images />
+    <section className='section'>
+      <div className='container center'>
+        <Gallery images={[]} />
       </div>
     </section>
-    <a href="/" className="button is-rounded go-up">
+    <a href='/' className='button is-rounded go-up'>
       ^
     </a>
-    <a href="/new" className="button is-rounded new-image">
+    <a href='/new' className='button is-rounded new-image'>
       +
     </a>
   </>
 );
+
+export default MainPage;

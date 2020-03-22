@@ -1,1 +1,1 @@
-export { default } from './LevelNav';
+export { default as LevelNav } from './LevelNav';
