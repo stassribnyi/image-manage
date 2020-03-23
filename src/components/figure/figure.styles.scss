@@ -1,17 +1,17 @@
 .figure {
   width: 100%;
-}
 
-.figure__content {
-  width: 100%;
-  min-height: 7rem;
-  overflow: hidden;
+  &__content {
+    width: 100%;
+    min-height: 7rem;
+    overflow: hidden;
 
-  border: 0.35rem outset #555;
-}
+    border: 0.35rem outset #555;
 
-.figure__content img {
-  width: 100%;
-  height: auto;
-  display: block;
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
 }

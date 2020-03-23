@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LevelNavLink } from '../level-nav-link';
+import { LevelNavLink } from './level-nav-link';
 
 import { LevelNavProps } from './level-nav.types';
 
