@@ -1,10 +1,8 @@
 import React from 'react';
 
-import { LevelNav } from '../../../components/LevelNav';
+import { LevelNav, LevelNavProps } from '../../../components/level-nav';
 
 import './Hero.scss';
-
-import { LevelNavProps } from '../../../components/LevelNav/LevelNav';
 
 export interface HeroProps {
   readonly links: LevelNavProps['links'];

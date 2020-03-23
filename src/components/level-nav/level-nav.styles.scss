@@ -1,0 +1,13 @@
+.level-nav {
+  &.level {
+    justify-content: center;
+
+    & > .level-nav__item {
+      flex-grow: 0;
+
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
