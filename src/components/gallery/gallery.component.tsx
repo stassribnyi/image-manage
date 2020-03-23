@@ -2,19 +2,15 @@ import React from 'react';
 
 import Masonry from 'react-masonry-component';
 
-import Figure from './Figure';
+import { Figure } from '../figure';
 
-import { Image } from '../../../providers';
+import { GalleryProps } from './gallery.types';
 
-import './Gallery.scss';
+import './gallery.styles.scss';
 
 const masonryOptions = {
   transitionDuration: 200
 };
-
-export interface GalleryProps {
-  readonly images: Array<Image>;
-}
 
 const Gallery: React.FC<GalleryProps> = ({ images }) => (
   <div className='container center'>

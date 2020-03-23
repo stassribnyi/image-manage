@@ -1,13 +1,10 @@
 import React from 'react';
 
-import { IconButton } from '../../components/icon-button';
-import { Hero } from '../../components/hero';
-import Gallery from './Gallery';
-
-import { useImageContext } from '../../contexts/image';
+import { IconButton, Gallery, Hero } from '../../components';
+import { useImageContext } from '../../contexts';
 import { useScroller } from '../../hooks';
 
-import './Main.scss';
+import './main.styles.scss';
 
 const links = [
   { to: '/', name: 'All' },
@@ -17,7 +14,7 @@ const links = [
   { to: '/with-humans', name: 'With humans' }
 ];
 
-const MainPage: React.FC = props => {
+const MainPage: React.FC = () => {
   const { images } = useImageContext();
   const scroller = useScroller();
 

@@ -1,11 +1,8 @@
 import React from 'react';
 
-import './Figure.scss';
+import { FigureProps } from './figure.types';
 
-export interface FigureProps {
-  readonly url: string;
-  readonly tooltip: string;
-}
+import './figure.styles.scss';
 
 const Figure: React.FC<FigureProps> = ({ url, tooltip }) => (
   <div className='figure column is-one-third'>
