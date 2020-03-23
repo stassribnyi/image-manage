@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Hero from './Hero';
+import { Hero } from '../../components/hero';
 import Gallery from './Gallery';
 
 import { useImageContext } from '../../contexts/image';
@@ -20,7 +20,12 @@ const MainPage: React.FC = props => {
 
   return (
     <>
-      <Hero links={links} />
+      <Hero
+        greeting='Welcome to'
+        title='Cats Photo Gallery'
+        subtitle="Here you will find lots of cat's photos from professional photographers all around the globe"
+        links={links}
+      />
       <section className='section'>
         <div className='container center'>
           <Gallery images={images} />
