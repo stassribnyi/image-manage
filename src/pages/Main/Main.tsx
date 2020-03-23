@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { IconButton } from '../../components/icon-button';
 import { Hero } from '../../components/hero';
 import Gallery from './Gallery';
 
@@ -19,7 +20,7 @@ const MainPage: React.FC = props => {
   const { images } = useImageContext();
 
   return (
-    <>
+    <div className='main-page'>
       <Hero
         greeting='Welcome to'
         title='Cats Photo Gallery'
@@ -27,17 +28,19 @@ const MainPage: React.FC = props => {
         links={links}
       />
       <section className='section'>
-        <div className='container center'>
-          <Gallery images={images} />
-        </div>
+        <Gallery images={images} />
       </section>
-      <a href='/' className='button is-rounded go-up'>
-        ^
-      </a>
-      <a href='/new' className='button is-rounded new-image'>
-        +
-      </a>
-    </>
+      <IconButton
+        to='/'
+        iconName='fa-chevron-up'
+        className='main-page__go-up'
+      />
+      <IconButton
+        to='/new'
+        iconName='fa-plus'
+        className='main-page__upload-image'
+      />
+    </div>
   );
 };
 

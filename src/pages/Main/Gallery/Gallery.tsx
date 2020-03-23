@@ -17,15 +17,17 @@ export interface GalleryProps {
 }
 
 const Gallery: React.FC<GalleryProps> = ({ images }) => (
-  <Masonry
-    elementType='div'
-    className='gallery columns is-variable is-2'
-    options={masonryOptions}
-  >
-    {images.map(img => (
-      <Figure key={img.id} {...img} />
-    ))}
-  </Masonry>
+  <div className='container center'>
+    <Masonry
+      elementType='div'
+      className='gallery columns is-variable is-2'
+      options={masonryOptions}
+    >
+      {images.map(img => (
+        <Figure key={img.id} {...img} />
+      ))}
+    </Masonry>
+  </div>
 );
 
 export default Gallery;

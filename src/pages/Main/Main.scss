@@ -1,0 +1,16 @@
+.main-page {
+  &__go-up,
+  &__upload-image {
+    top: 100vh;
+    position: fixed;
+    transform: translateY(calc(-100% - 1.75rem));
+  }
+
+  &__go-up {
+    left: 1.75rem;
+  }
+
+  &__upload-image {
+    right: 1.75rem;
+  }
+}

@@ -1,10 +1,3 @@
 .base-layout {
   position: relative;
 }
-
-.base-layout .new-image {
-  position: fixed;
-  top: 100vh;
-  right: 1.75rem;
-  transform: translateY(calc(-100% - 1.75rem));
-}
