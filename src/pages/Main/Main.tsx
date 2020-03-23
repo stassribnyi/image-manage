@@ -5,6 +5,7 @@ import { Hero } from '../../components/hero';
 import Gallery from './Gallery';
 
 import { useImageContext } from '../../contexts/image';
+import { useScroller } from '../../hooks';
 
 import './Main.scss';
 
@@ -18,6 +19,11 @@ const links = [
 
 const MainPage: React.FC = props => {
   const { images } = useImageContext();
+  const scroller = useScroller();
+
+  const handleGoUp = () => {
+    scroller?.toTop(0);
+  };
 
   return (
     <div className='main-page'>
@@ -31,9 +37,10 @@ const MainPage: React.FC = props => {
         <Gallery images={images} />
       </section>
       <IconButton
-        to='/'
+        to='#'
         iconName='fa-chevron-up'
         className='main-page__go-up'
+        onClick={handleGoUp}
       />
       <IconButton
         to='/new'
