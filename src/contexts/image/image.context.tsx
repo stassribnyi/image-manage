@@ -1,9 +1,13 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 import { Image, imageProvider } from '../../providers';
 
+const IMAGES_PER_PAGE = 10;
+
 export interface ImageContextState {
+  readonly hasMore: boolean;
   readonly images: Array<Image>;
+  readonly loadPage: (pageNumber: number) => Promise<void>;
 }
 
 export const ImageContext = createContext<ImageContextState>(
@@ -11,15 +15,37 @@ export const ImageContext = createContext<ImageContextState>(
 );
 
 export const ImageProvider: React.FC = ({ children }) => {
-  const [images, setImages] = useState<Array<Image>>([]);
+  const [{ hasMore, images }, setState] = useState<
+    Omit<ImageContextState, 'loadPage'>
+  >({
+    images: [],
+    hasMore: true
+  });
 
-  const context = {
-    images
+  const loadPage = async (pageNumber: number): Promise<void> => {
+    const pageImages = await imageProvider.getImages(
+      pageNumber,
+      IMAGES_PER_PAGE
+    );
+
+    if (!pageImages.length) {
+      setState(oldState => ({ ...oldState, hasMore: false }));
+
+      return;
+    }
+
+    setState(({ images, ...restState }) => ({
+      ...restState,
+      images: [...images, ...pageImages],
+      hasMore: pageImages.length === IMAGES_PER_PAGE
+    }));
   };
 
-  useEffect(() => {
-    imageProvider.getImages(0, 100).then(images => setImages(images));
-  }, []);
+  const context = {
+    images,
+    hasMore,
+    loadPage
+  };
 
   return (
     <ImageContext.Provider value={context}>{children}</ImageContext.Provider>

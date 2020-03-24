@@ -1,0 +1,12 @@
+.spinner {
+  display: flex;
+  justify-content: center;
+
+  font-size: 2rem;
+
+  .loader {
+    // TODO: use css variables
+    border-left-color: #ccc;
+    border-bottom-color: #ccc;
+  }
+}

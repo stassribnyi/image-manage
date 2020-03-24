@@ -1,6 +1,7 @@
 import React from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 
-import { IconButton, Gallery, Hero } from '../../components';
+import { IconButton, Gallery, Hero, Spinner } from '../../components';
 import { useImageContext } from '../../contexts';
 import { useScroller } from '../../hooks';
 
@@ -15,7 +16,7 @@ const links = [
 ];
 
 const MainPage: React.FC = () => {
-  const { images } = useImageContext();
+  const { hasMore, images, loadPage } = useImageContext();
   const scroller = useScroller();
 
   const handleGoUp = () => {
@@ -30,9 +31,18 @@ const MainPage: React.FC = () => {
         subtitle="Here you will find lots of cat's photos from professional photographers all around the globe"
         links={links}
       />
-      <section className='section'>
+      <InfiniteScroll
+        element='section'
+        className='section'
+        pageStart={0}
+        initialLoad={true}
+        loadMore={loadPage}
+        hasMore={hasMore}
+        loader={<Spinner key={0} />}
+      >
         <Gallery images={images} />
-      </section>
+      </InfiniteScroll>
+
       <IconButton
         to='#'
         iconName='fa-chevron-up'

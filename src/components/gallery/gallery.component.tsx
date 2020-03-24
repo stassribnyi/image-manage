@@ -13,10 +13,10 @@ const masonryOptions = {
 };
 
 const Gallery: React.FC<GalleryProps> = ({ images }) => (
-  <div className='container center'>
+  <div className='gallery container center'>
     <Masonry
       elementType='div'
-      className='gallery columns is-variable is-2'
+      className='gallery__masonry columns is-variable is-2'
       options={masonryOptions}
     >
       {images.map(img => (
