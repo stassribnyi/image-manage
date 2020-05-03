@@ -41,6 +41,11 @@ const MainPage: React.FC = () => {
         loader={<Spinner key={0} />}
       >
         <Gallery images={images} />
+        {!hasMore && (
+          <div className='has-text-centered'>
+            <button className='button is-text'>Load more...</button>
+          </div>
+        )}
       </InfiniteScroll>
 
       <IconButton
